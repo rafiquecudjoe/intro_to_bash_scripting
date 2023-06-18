@@ -42,8 +42,58 @@ remove_credential(){
      read -p "Enter the specific credential you want to remove :" credential
 
      # remove credential
-     rm Personal_Records_System/credentials/$credential_name/"$credential".txt
+     rm Personal_Records_System/credentials/$credential_name/$credential.txt
      
+}
+
+add_personal_note(){
+     read -p "Enter name of personal note :" note_name
+     read -p "Enter personal note :" note
+
+     # create directory if not created
+     location="Personal_Records_System/notes"
+     mkdir -p $location
+
+     # write credential to file
+     echo "$note" > $location/$note_name.txt
+
+     # secure credential so that no user can access
+     chmod 600 $location/$name_of_date_to_add.txt
+     echo "Personal note added successfully"
+}
+
+remove_personal_note(){
+     read -p "Enter name of personal note to remove :" important
+
+     # remove credential
+    rm Personal_Records_System/notes/testing.txt
+
+}
+
+add_important_date(){
+     read -p "Enter name of important date :" name_of_date_to_add
+     read -p "Enter important date :" date
+
+     # create directory if not created
+     location="Personal_Records_System/notes"
+     mkdir -p $location
+
+     # write important date to file
+     echo "$date" > $location/$name_of_date_to_add.txt
+
+     # secure credential so that no user can access
+     chmod 600 $location/$name_of_date_to_add.txt
+     echo "Important date  added successfully"
+}
+
+remove_important_date(){
+     read -p "Enter name of important date to remove :" date_to_remove
+
+     # remove credential
+     rm Personal_Records_System/notes/$date_to_remove.txt
+
+     echo "Important date added successfully"
+
 }
 
 
@@ -56,11 +106,11 @@ handle_user_input(){
 		   ;;
 	   3) add_personal_note
 		   ;;
-           4) add_personal_note
+           4) remove_personal_note
 		   ;;
-           5) add_personal_note
+           5) add_important_date
                    ;;
-           6) add_personal_note
+           6) remove_important_date
                    ;;
 	   7) remove_personal_note
 		   ;;
