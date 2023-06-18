@@ -7,10 +7,11 @@ display_menu(){
     echo "4. Remove personal notes"
     echo "5. Add an important date"
     echo "6. Remove important date"
-    echo "7. Search for a credential or note"
-    echo "8. Add a backup for records"
-    echo "9. Generate a report"
-    echo "10. Exit"
+    echo "7. Generate random password"
+    echo "8. Search for a credential or note"
+    echo "9. Add a backup for records"
+    echo "10. Generate a report"
+    echo "11. Exit"
 }
 
 add_credential(){
@@ -96,7 +97,20 @@ remove_important_date(){
 
 }
 
+generate_random_password(){
+read -p "How many characters you would like the password to have? " pass_lenght
 
+for i in {1}; do (tr -cd '[:alnum:]' < /dev/urandom | fold -w${pass_lenght} | head -n 1); done
+
+# Print the strings
+echo "$pass_output"
+}
+
+add_record_backup(){
+	time=$(date +%s)
+	zip $time.zip Personal_Records_System
+	echo "Record backed up successfully"
+}
 handle_user_input(){
    read -p "Enter your choice: " choice
    case $choice in
@@ -111,14 +125,18 @@ handle_user_input(){
            5) add_important_date
                    ;;
            6) remove_important_date
-                   ;;
-	   7) remove_personal_note
 		   ;;
+           7) generate_random_password
+                   ;;
+
 	   8) search_for_record
 		   ;;
-	   9) add_backup
+	   9) add_record_backup
 		   ;;
-	   10) echo "Existing..."
+          10) add_record_backup
+                   ;;
+	  11) echo "Goodbye, ${USER}"
+	       echo "Existing..."
                exit 0
                    ;;
    esac
